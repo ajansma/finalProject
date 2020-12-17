@@ -68,3 +68,26 @@ def confidence_interval_graph(conf_interval_low_temp, Xbar_low, conf_interval_hi
     plt.xlim([0.5, 1.5])
     plt.legend(loc='upper right')
     plt.show()
+    
+def clean_dates():
+    dates_no_repeats = pd.Series(dtype=int)
+    for i in range (8, 11):
+        for j in range(1,32):
+            if i == 8 and j >= 29:
+                date_str = "2020-0" + str(i) + "-" + str(j)
+                dates_no_repeats = dates_no_repeats.append(pd.Series(date_str))
+            elif i == 9:
+                if j < 31: 
+                    if j < 10:
+                        date_str = "2020-0" + str(i) + "-0" + str(j)
+                    else: 
+                        date_str = "2020-0" + str(i) + "-" + str(j)
+                    dates_no_repeats = dates_no_repeats.append(pd.Series(date_str))
+            elif i == 10:
+                if j < 31: 
+                    if j < 10:
+                        date_str = "2020-" + str(i) + "-0" + str(j)
+                    else: 
+                        date_str = "2020-" + str(i) + "-" + str(j)
+                    dates_no_repeats = dates_no_repeats.append(pd.Series(date_str))
+    return dates_no_repeats
